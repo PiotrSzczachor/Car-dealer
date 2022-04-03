@@ -47,12 +47,14 @@ namespace Komis
                 textBox5.Text != "")
             {
                 Console.WriteLine(textBox5.Text);
-                File.Copy(textBox5.Text, @"C:\Users\piotr\source\repos\Komis\Komis\Images\" + textBox1.Text + ".jpg", true);
+                string filename = textBox1.Text + textBox2.Text + textBox4.Text + ".jpg";
+                File.Copy(textBox5.Text, @"C:\Users\piotr\source\repos\Komis\Komis\Images\" + filename, true);
                 label5.Visible = true;
-                string car = textBox1.Text + "," + textBox2.Text + "," + textBox3.Text + "," + textBox4.Text + "\n";
+                string car = textBox1.Text + "," + textBox2.Text + "," + textBox3.Text + "," + textBox4.Text;
                 TextWriter tsw = new StreamWriter(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt", true);
                 tsw.WriteLine(car);
                 tsw.Close();
+                button2.Enabled = false;
             }
         }
 
@@ -99,6 +101,8 @@ namespace Komis
             textBox4.Text = "";
             textBox5.Text = "";
             pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\AddPhoto.jpg");
+            button2.Enabled = true;
+            label5.Visible = false;
         }
     }
 }

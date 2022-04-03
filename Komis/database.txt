@@ -144,3 +144,4 @@ Skoda,Superb,2.0 TSI,black
 Skoda,Superb,2.0 TSI,blue
 Skoda,Superb,2.0 TSI,gray
 Skoda,Superb,2.0 TSI,red
+Fiat,126p,1.0 TSI,red

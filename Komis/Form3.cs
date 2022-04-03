@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,22 +29,30 @@ namespace Komis
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || pictureBox1.Image == null)
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "")
+            {   
+                MessageBox.Show("You need to fill all text boxes",
+                                "Fill all text boxes",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information); 
+            }
+            if(pictureBox1.ImageLocation == @"C:\Users\Piotr\source\repos\Komis\Komis\Images\AddPhoto.jpg")
             {
-                if(pictureBox1.Image == null)
-                {
-                    MessageBox.Show("You need to add car photo",
-                                    "Add car photo",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                } else
-                {
-                    MessageBox.Show("You need to fill all text boxes",
-                                    "Fill all text boxes",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information);
-                }
-                
+                MessageBox.Show("You need to add car photo",
+                                "Add car photo",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            if(textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && textBox4.Text != "" &&
+                textBox5.Text != "")
+            {
+                Console.WriteLine(textBox5.Text);
+                File.Copy(textBox5.Text, @"C:\Users\piotr\source\repos\Komis\Komis\Images\" + textBox1.Text + ".jpg", true);
+                label5.Visible = true;
+                string car = textBox1.Text + "," + textBox2.Text + "," + textBox3.Text + "," + textBox4.Text + "\n";
+                TextWriter tsw = new StreamWriter(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt", true);
+                tsw.WriteLine(car);
+                tsw.Close();
             }
         }
 
@@ -56,6 +65,7 @@ namespace Komis
                 if (fileNames.Length > 0)
                 {
                     pictureBox1.Image = Image.FromFile(fileNames[0]);
+                    textBox5.Text = fileNames[0];
                 }
             }
         }
@@ -69,5 +79,27 @@ namespace Komis
         {
             e.Effect = DragDropEffects.Copy;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image files(*.jpg, *.jpeg; *.gif; *.bmp;)|*.jpg; *.jpeg; *.gif; *bmp;";
+            if(open.ShowDialog() == DialogResult.OK)
+            {
+                textBox5.Text = open.FileName;
+                pictureBox1.Image = new Bitmap(open.FileName);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\AddPhoto.jpg");
+        }
     }
 }
+

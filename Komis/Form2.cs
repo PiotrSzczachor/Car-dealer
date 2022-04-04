@@ -35,7 +35,19 @@ namespace Komis
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            string name = comboBox1.Text + comboBox2.Text + comboBox4.Text + ".jpg";
+            string filename = name.Replace("\n", "").Replace("\r", "");
+            pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\" + filename);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            comboBox2.Enabled = false;
+            comboBox3.Enabled = false;
+            comboBox4.Enabled = false;
+            comboBox2.Items.Clear();
+            comboBox2.Text = "";
+            comboBox3.Items.Clear();
+            comboBox3.Text = "";
+            comboBox4.Items.Clear();
+            comboBox4.Text = "";
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -67,10 +79,30 @@ namespace Komis
                 if (line.Contains(','))
                 {
                     string[] parts = line.Split(',');
-                    if (!comboBox3.Items.Contains(parts[2]) && parts[0] == comboBox1.SelectedItem.ToString() &&
-                       parts[1] == comboBox1.SelectedItem.ToString())
+                    if (!comboBox3.Items.Contains(parts[2]) && (parts[0] == comboBox1.SelectedItem.ToString() &&
+                       parts[1] == comboBox2.SelectedItem.ToString()))
                     {
                         comboBox3.Items.Add(parts[2]);
+                    }
+                }
+
+            }
+        }
+
+        private void comboBox3_SelectedValueChanged(object sender, EventArgs e)
+        {
+            comboBox4.Enabled = true;
+            string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt");
+            string[] carsInfo = readText.Split('\n');
+            foreach (string line in carsInfo)
+            {
+                if (line.Contains(','))
+                {
+                    string[] parts = line.Split(',');
+                    if (!comboBox4.Items.Contains(parts[3]) && (parts[0] == comboBox1.SelectedItem.ToString() &&
+                       parts[1] == comboBox2.SelectedItem.ToString() && parts[2] == comboBox3.SelectedItem.ToString()))
+                    {
+                        comboBox4.Items.Add(parts[3]);
                     }
                 }
 

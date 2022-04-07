@@ -12,7 +12,9 @@ using System.Windows.Forms;
 namespace Komis
 {
     public partial class Form2 : Form
+
     {
+        string selectedCar;
         public Form2()
         {
             InitializeComponent();
@@ -39,6 +41,8 @@ namespace Komis
             string filename = name.Replace("\n", "").Replace("\r", "");
             pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\" + filename);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            selectedCar = comboBox1.SelectedItem.ToString() + "," + comboBox2.SelectedItem.ToString() +
+                        "," + comboBox3.SelectedItem.ToString() + "," + comboBox4.SelectedItem.ToString();
             comboBox2.Enabled = false;
             comboBox3.Enabled = false;
             comboBox4.Enabled = false;
@@ -107,6 +111,31 @@ namespace Komis
                 }
 
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            bool carInFavorites = false;
+            string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\favorites.txt");
+            string[] carsInfo = readText.Split('\n');
+            foreach(string s in carsInfo)
+            {
+                string ss = s.Replace("/n", "").Replace("\r", "");
+                string car = selectedCar.Replace("/n", "").Replace("\r", "");
+                if (ss == car)
+                {
+                    Console.WriteLine(s);
+                    Console.WriteLine(selectedCar);
+                    carInFavorites = true;
+                }
+            }
+            if (!carInFavorites)
+            {
+                TextWriter tsw = new StreamWriter(@"C:\Users\piotr\source\repos\Komis\Komis\favorites.txt", true);
+                tsw.WriteLine(selectedCar);
+                tsw.Close();
+            }
+            
         }
     }
 }

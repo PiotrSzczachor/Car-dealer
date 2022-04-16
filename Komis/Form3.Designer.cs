@@ -53,9 +53,9 @@
             this.label1.Location = new System.Drawing.Point(156, 30);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 29);
+            this.label1.Size = new System.Drawing.Size(77, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Marka";
+            this.label1.Text = "Brand";
             // 
             // label2
             // 
@@ -75,9 +75,9 @@
             this.label3.Location = new System.Drawing.Point(156, 117);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 29);
+            this.label3.Size = new System.Drawing.Size(89, 29);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Silnik";
+            this.label3.Text = "Engine";
             // 
             // label4
             // 
@@ -86,9 +86,9 @@
             this.label4.Location = new System.Drawing.Point(156, 162);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 29);
+            this.label4.Size = new System.Drawing.Size(72, 29);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Kolor";
+            this.label4.Text = "Color";
             // 
             // textBox1
             // 

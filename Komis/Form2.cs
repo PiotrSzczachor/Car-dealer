@@ -18,6 +18,8 @@ namespace Komis
         public Form2()
         {
             InitializeComponent();
+            button1.Enabled = false;
+            button2.Visible = false;
             comboBox2.Enabled = false;
             comboBox3.Enabled = false;
             comboBox4.Enabled = false;
@@ -37,7 +39,8 @@ namespace Komis
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = comboBox1.Text + comboBox2.Text + comboBox4.Text + ".jpg";
+            string engine = comboBox3.Text.Replace(".", "").Replace(" ", "");
+            string name = comboBox1.Text + comboBox2.Text + comboBox4.Text + engine + ".jpg";
             string filename = name.Replace("\n", "").Replace("\r", "");
             pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\" + filename);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -52,11 +55,15 @@ namespace Komis
             comboBox3.Text = "";
             comboBox4.Items.Clear();
             comboBox4.Text = "";
+            button2.Visible = true;
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             comboBox2.Enabled = true;
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+            comboBox4.Items.Clear();
             string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt");
             string[] carsInfo = readText.Split('\n');
             foreach (string line in carsInfo)
@@ -76,6 +83,8 @@ namespace Komis
         private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
         {
             comboBox3.Enabled = true;
+            comboBox3.Items.Clear();
+            comboBox4.Items.Clear();
             string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt");
             string[] carsInfo = readText.Split('\n');
             foreach (string line in carsInfo)
@@ -96,6 +105,7 @@ namespace Komis
         private void comboBox3_SelectedValueChanged(object sender, EventArgs e)
         {
             comboBox4.Enabled = true;
+            comboBox4.Items.Clear();
             string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt");
             string[] carsInfo = readText.Split('\n');
             foreach (string line in carsInfo)
@@ -121,21 +131,32 @@ namespace Komis
             foreach(string s in carsInfo)
             {
                 string ss = s.Replace("/n", "").Replace("\r", "");
-                string car = selectedCar.Replace("/n", "").Replace("\r", "");
+                string car = selectedCar.Replace("\n", "").Replace("\r", "");
                 if (ss == car)
                 {
-                    Console.WriteLine(s);
-                    Console.WriteLine(selectedCar);
                     carInFavorites = true;
                 }
             }
             if (!carInFavorites)
             {
                 TextWriter tsw = new StreamWriter(@"C:\Users\piotr\source\repos\Komis\Komis\favorites.txt", true);
-                tsw.WriteLine(selectedCar);
+                tsw.WriteLine(selectedCar.Replace("\n", "").Replace("\r", ""));
                 tsw.Close();
             }
+            button2.Visible = false;
             
+        }
+
+        private void comboBox4_SelectedValueChanged(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Form1().ShowDialog();
+            this.Close();
         }
     }
 }

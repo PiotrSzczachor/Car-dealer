@@ -47,10 +47,12 @@ namespace Komis
                 textBox5.Text != "")
             {
                 Console.WriteLine(textBox5.Text);
-                string filename = textBox1.Text + textBox2.Text + textBox4.Text + ".jpg";
+                string engine = textBox3.Text.Replace(".", "").Replace(" ", "");
+                string filename = textBox1.Text + textBox2.Text + textBox4.Text + engine + ".jpg";
                 File.Copy(textBox5.Text, @"C:\Users\piotr\source\repos\Komis\Komis\Images\" + filename, true);
                 label5.Visible = true;
                 string car = textBox1.Text + "," + textBox2.Text + "," + textBox3.Text + "," + textBox4.Text;
+                car = car.Replace("\n", "").Replace("\r", "");
                 TextWriter tsw = new StreamWriter(@"C:\Users\piotr\source\repos\Komis\Komis\database.txt", true);
                 tsw.WriteLine(car);
                 tsw.Close();

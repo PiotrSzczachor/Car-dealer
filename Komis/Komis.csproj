@@ -110,7 +110,6 @@
   <ItemGroup>
     <Content Include="database.txt" />
     <Content Include="favorites.txt" />
-    <Content Include="favourites.txt" />
     <Content Include="Images\AddPhoto.jpg" />
     <Content Include="Images\AudiA1black.jpg" />
     <Content Include="Images\AudiA1blue.jpg" />
@@ -150,6 +149,7 @@
     <Content Include="Images\SkodaSuperbblue.jpg" />
     <Content Include="Images\SkodaSuperbgray.jpg" />
     <Content Include="Images\SkodaSuperbred.jpg" />
+    <Content Include="testdrives.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

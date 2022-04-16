@@ -9,3 +9,4 @@ Skoda,Superb,2.0 TSI,red
 Porshe,911,4.0,grey
 Seat,Leon,1.6 TDI,white
 BMW,M4,3.0,green
+Seat,Cordoba,2.0,white

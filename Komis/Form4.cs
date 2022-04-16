@@ -34,29 +34,33 @@ namespace Komis
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             string car = listBox1.GetItemText(listBox1.SelectedItem);
-            string[] parts = car.Split(',');
-            string brand = parts[0];
-            string model = parts[1];
-            string engine = parts[2].Replace(".", "").Replace(" ", "");
-            string color = parts[3].Replace("\r", "");
-            string filename = brand + model + color + engine + ".jpg";
-            Console.WriteLine(car);
-            pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\" + filename);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            button2.Enabled = true;
-            button1.Enabled = true;
-            listBox2.Items.Clear();
-            string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\testdrives.txt");
-            string[] carsInfo = readText.Split('\n');
-            foreach (string line in carsInfo)
+            if (car.Contains(","))
             {
-                if (line.Contains(car.Replace("\n", "").Replace("\r", "")))
+                string[] parts = car.Split(',');
+                string brand = parts[0];
+                string model = parts[1];
+                string engine = parts[2].Replace(".", "").Replace(" ", "");
+                string color = parts[3].Replace("\r", "");
+                string filename = brand + model + color + engine + ".jpg";
+                Console.WriteLine(car);
+                pictureBox1.Image = Image.FromFile(@"C:\Users\Piotr\source\repos\Komis\Komis\Images\" + filename);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                button2.Enabled = true;
+                button1.Enabled = true;
+                listBox2.Items.Clear();
+                string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\testdrives.txt");
+                string[] carsInfo = readText.Split('\n');
+                foreach (string line in carsInfo)
                 {
-                    string[] parts_ = line.Split(',');
-                    listBox2.Items.Add(parts_[4]);
-                }
+                    if (line.Contains(car.Replace("\n", "").Replace("\r", "")))
+                    {
+                        string[] parts_ = line.Split(',');
+                        listBox2.Items.Add(parts_[4]);
+                    }
 
+                }
             }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -69,6 +73,13 @@ namespace Komis
             File.WriteAllLines(tempFile, linesToKeep);
             File.Delete(fileName);
             File.Move(tempFile, fileName);
+            listBox1.Items.Clear();
+            string readText = File.ReadAllText(@"C:\Users\piotr\source\repos\Komis\Komis\favorites.txt");
+            string[] carsInfo = readText.Split('\n');
+            foreach (string line in carsInfo)
+            {
+                listBox1.Items.Add(line);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -112,6 +123,13 @@ namespace Komis
 
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Form1().ShowDialog(); ;
+            this.Close();
         }
     }
 }

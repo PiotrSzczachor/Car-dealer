@@ -4,3 +4,5 @@ Saab,9-3,1.8t,black,28-04-2022
 BMW,M4,3.0,green,20-04-2022
 BMW,M4,3.0,green,22-04-2022
 Saab,9-3,1.8t,black,27-04-2022
+BMW,M4,3.0,green,29-04-2022
+BMW,M4,3.0,green,30-04-2022
